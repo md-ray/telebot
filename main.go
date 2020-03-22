@@ -60,7 +60,7 @@ func main() {
 				cmd := exec.Command("/usr/bin/transmission-remote", "--auth", tranmissionPair, "-a", words[1])
 				//cmd := exec.Command("dir")
 				out, err := cmd.CombinedOutput()
-				if err != nil {
+				if err == nil {
 					log.Printf("Command finished without error")
 					keyword = "Successfully executed. " + string(out)
 				} else {
@@ -69,11 +69,10 @@ func main() {
 				}
 			}
 		} else if strings.EqualFold(keyword, "torrent-list") {
-			param := "--auth transmission:transmission -a \"" + words[1] + "\""
-			log.Printf("param : " + param)
+
 			cmd := exec.Command("/usr/bin/transmission-remote", "--auth", tranmissionPair, "-l")
 			out, err := cmd.CombinedOutput()
-			if err != nil {
+			if err == nil {
 				log.Printf("Command finished without error")
 				keyword = "Successfully executed. " + string(out)
 			} else {
